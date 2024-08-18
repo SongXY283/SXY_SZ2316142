@@ -36,9 +36,7 @@ student = torch.nn.DataParallel(student)
 student = student.cuda()
 student.train()
 optimizer = optim.SGD(student.parameters(), lr=0.1, momentum=0.9, weight_decay=2e-4)
-def kl_loss(a,b):
-    loss = -a*b + torch.log(b+1e-5)*b
-    return loss
+
 teacher = wideresnet()
 teacher.load_state_dict(torch.load('./models/model_cifar_wrn.pt'))
 teacher = torch.nn.DataParallel(teacher)
