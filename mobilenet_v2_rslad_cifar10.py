@@ -42,6 +42,8 @@ teacher.load_state_dict(torch.load('./models/model_cifar_wrn.pt'))
 teacher = torch.nn.DataParallel(teacher)
 teacher = teacher.cuda()
 teacher.eval()
+def kl_loss(a,b):
+    return -a*b*1 + torch.log(b+1e-5)*b
 
 for epoch in range(1,epochs+1):
     for step,(train_batch_data,train_batch_labels) in enumerate(trainloader):
